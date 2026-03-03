@@ -1,0 +1,28 @@
+import PackageCard from "./PackageCard";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
+
+export default function PackageCrousel() {
+    return (
+        <div className=" max-w-7xl px-4 mx-auto">
+            <div >
+                <h2 className=" text-2xl font-semibold">Popular Packages</h2>
+            </div>
+            <Carousel
+                opts={{
+                    align: "start",
+                }}
+                className="w-full md:px-6 mt-8 "
+            >
+                <CarouselContent>
+                    {Array.from({ length: 10 }).map((_, index) => (
+                        <CarouselItem key={index} className=" basis-[300px] sm:basis-1/2 md:basis-[372px] ">
+                            <PackageCard />
+                        </CarouselItem>
+                    ))}
+                </CarouselContent>
+                <CarouselPrevious className=" left-0 -translate-x-1/2" />
+                <CarouselNext className=" right-0 translate-x-1/2" />
+            </Carousel>
+        </div>
+    );
+}
