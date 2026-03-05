@@ -64,7 +64,7 @@ export default function PackagesPage() {
         pkg.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         pkg.location.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
+    return <></>
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">

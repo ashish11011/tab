@@ -73,7 +73,7 @@ export default function QueriesPage() {
         q.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
         q.slug.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
+    return <></>
     return (
         <div className="space-y-6">
             <div>

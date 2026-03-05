@@ -59,7 +59,7 @@ export default function BlogCategoriesPage() {
     const filteredCategories = categories.filter(cat =>
         cat.name.toLowerCase().includes(searchTerm.toLowerCase())
     );
-
+    return <></>
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">

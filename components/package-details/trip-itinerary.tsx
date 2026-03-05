@@ -35,7 +35,7 @@ export function TripItinerary({ itinerary }: TripItineraryProps) {
                         className={cn("bg-gray-100 py-2 px-4 rounded-2xl border-none", openItem === `item-${item.id}` && "bg-primary/20")}
                     >
                         <AccordionTrigger className="hover:no-underline text-base cursor-pointer py-2">
-                            Day {item.day}: {item.title}
+                            {item.title}
                         </AccordionTrigger>
                         <AccordionContent className="text-gray-700">
                             <div dangerouslySetInnerHTML={{ __html: item.description }} className="prose prose-sm max-w-none" />

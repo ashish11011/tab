@@ -26,7 +26,6 @@ export default CompaniesLogos;
 
 const data = [
     "/logos/aiesec.svg",
-    "/logos/lg-logo.png",
     "/logos/kanoria-college-logo.png",
     "/logos/pidilite.png",
     "/logos/Xaviers-Jaipur-Logo.png",
