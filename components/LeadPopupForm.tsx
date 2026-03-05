@@ -24,7 +24,7 @@ export const LeadPopupForm = ({ open, setOpen }: { open: boolean, setOpen: (open
             email: "",
             phone: "",
             message: "",
-            slug: slug,
+            slug: slug === "home" ? "/" : `/${slug}`,
         },
     });
 

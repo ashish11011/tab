@@ -101,7 +101,7 @@ export default function QueriesPage() {
                         <TableRow>
                             <TableHead>User</TableHead>
                             <TableHead>Contact</TableHead>
-                            <TableHead>Package Slug</TableHead>
+                            <TableHead>Slug</TableHead>
                             <TableHead>Date</TableHead>
                             <TableHead>Message</TableHead>
                             <TableHead className="text-right">Action</TableHead>
@@ -131,7 +131,7 @@ export default function QueriesPage() {
                                         </div>
                                     </TableCell>
                                     <TableCell>
-                                        <Link href={`/package/${query.slug}`} target="_blank">
+                                        <Link href={`${query.slug.startsWith('/') ? '' : '/'}${query.slug}`} target="_blank">
                                             <Badge variant="secondary" className="hover:bg-secondary/80 cursor-pointer">
                                                 {query.slug}
                                             </Badge>

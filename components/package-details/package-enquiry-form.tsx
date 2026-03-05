@@ -23,7 +23,7 @@ export function PackageEnquiryForm({ slug }: PackageEnquiryFormProps) {
             email: "",
             phone: "",
             message: "",
-            slug: slug,
+            slug: `/package/${slug}`,
         },
     });
 
