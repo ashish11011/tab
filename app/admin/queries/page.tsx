@@ -5,9 +5,7 @@ import {
     Search,
     Mail,
     Phone,
-    MessageSquare,
     Calendar,
-    ExternalLink,
     Trash2
 } from "lucide-react";
 import {

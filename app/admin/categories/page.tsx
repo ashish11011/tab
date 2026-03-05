@@ -22,11 +22,9 @@ import {
     deleteCategory
 } from "@/lib/actions";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
 import Link from "next/link";
 
 export default function CategoriesPage() {
-    const router = useRouter();
     const [categories, setCategories] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
     const [searchTerm, setSearchTerm] = useState("");

@@ -4,17 +4,11 @@ import { useState, useEffect } from "react";
 import CompaniesLogos from "@/components/CompaniesLogo";
 import DomesticTrip from "@/components/DomasticTrip";
 import { FAQsAccordion } from "@/components/FAQAccordion";
-import { Footer } from "@/components/Footer";
 import HowItWorksSection from "@/components/HowItWork";
 import { LeadPopupForm } from "@/components/LeadPopupForm";
-import PackageCard from "@/components/PackageCard";
 import PackageCrousel from "@/components/PackageCrousel";
 import ReasonsSection from "@/components/ReasonSection";
 import TripStats from "@/components/tripStar";
-import { Button } from "@/components/ui/button";
-import { InputGroup, InputGroupAddon, InputGroupInput, InputGroupText } from "@/components/ui/input-group";
-import { Phone, Search } from "lucide-react";
-import Link from "next/link";
 
 export default function Home() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);

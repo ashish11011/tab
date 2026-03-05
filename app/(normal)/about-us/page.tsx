@@ -18,7 +18,7 @@ export default function Page() {
 // components/about/about-hero.tsx (Server Component)
 function AboutHero() {
     return (
-        <section className="w-full py-20 bg-gradient-to-b from-blue-50 to-white">
+        <section className="w-full py-20 bg-linear-to-b from-blue-50 to-white">
             <div className="max-w-6xl mx-auto px-6 text-center">
                 <h1 className="text-4xl md:text-5xl font-bold">About The Adventure Bag Club</h1>
                 <p className="mt-6 text-gray-600 max-w-3xl mx-auto">

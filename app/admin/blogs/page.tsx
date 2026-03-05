@@ -6,7 +6,6 @@ import {
     Pencil,
     Trash2,
     Search,
-    BookOpen
 } from "lucide-react";
 import {
     Table,
