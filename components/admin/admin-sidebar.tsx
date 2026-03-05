@@ -7,7 +7,8 @@ import {
     Layers,
     MessageSquare,
     Settings,
-    ChevronRight
+    ChevronRight,
+    BookOpen
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
@@ -25,8 +26,18 @@ const navItems = [
         icon: Package,
     },
     {
-        title: "Categories",
+        title: "Package Cat",
         href: "/admin/categories",
+        icon: Layers,
+    },
+    {
+        title: "Blogs",
+        href: "/admin/blogs",
+        icon: BookOpen,
+    },
+    {
+        title: "Blog Cat",
+        href: "/admin/blog-categories",
         icon: Layers,
     },
     {

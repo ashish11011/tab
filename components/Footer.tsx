@@ -132,12 +132,8 @@ const FOOTER_LINKS = [
                 href: "/contact-us"
             },
             {
-                title: "Himachal",
-                href: "/himachal"
-            },
-            {
-                title: "Udaipur",
-                href: "/udaipur"
+                title: "About Us",
+                href: "/about-us"
             },
             {
                 title: "Reviews",

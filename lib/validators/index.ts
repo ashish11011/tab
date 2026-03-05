@@ -65,6 +65,30 @@ export const formQuerySchema = z.object({
     slug: z.string().min(1, "Slug is required"),
 });
 
+export const blogSchema = z.object({
+    id: z.number().optional(),
+    title: z.string().min(1, "Title is required"),
+    metaDescription: z.string().min(1, "Meta Description is required"),
+    metaTitle: z.string().min(1, "Meta Title is required"),
+    metaKeywords: z.string().min(1, "Meta Keywords are required"),
+    slug: z.string().min(1, "Slug is required").regex(/^\S*$/, "Slug should not contain spaces"),
+    description: z.string().min(1, "Description is required"),
+    content: z.string().min(1, "Content is required"),
+    image: z.string().url("Valid image URL is required"),
+    userName: z.string().min(1, "Author name is required"),
+    userPosition: z.string().min(1, "Author position is required"),
+    categoryIds: z.array(z.number()).min(1, "At least one category is required"),
+});
+
+export const blogCategorySchema = z.object({
+    id: z.number().optional(),
+    name: z.string().min(1, "Name is required"),
+    slug: z.string().min(1, "Slug is required").regex(/^\S*$/, "Slug should not contain spaces"),
+    metaTitle: z.string().min(1, "Meta Title is required"),
+    metaDescription: z.string().min(1, "Meta Description is required"),
+    metaKeywords: z.string().min(1, "Meta Keywords are required"),
+});
+
 export type CategoryInput = z.infer<typeof categorySchema>;
 export type PackageInput = z.infer<typeof packageSchema>;
 export type PriceTitleInput = z.infer<typeof priceTitleSchema>;
@@ -72,3 +96,6 @@ export type ItineraryInput = z.infer<typeof itinerarySchema>;
 export type PackageMediaInput = z.infer<typeof packageMediaSchema>;
 export type CategoryFaqInput = z.infer<typeof categoryFaqSchema>;
 export type FormQueryInput = z.infer<typeof formQuerySchema>;
+export type BlogInput = z.infer<typeof blogSchema>;
+export type BlogCategoryInput = z.infer<typeof blogCategorySchema>;
+

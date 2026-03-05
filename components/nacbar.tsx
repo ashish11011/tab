@@ -55,33 +55,33 @@ export const Navbar = () => {
 
 const NAVBAR_LINKS = [
     {
-        title: "Spiti Vailly",
-        href: "/tours",
+        title: "Spiti Valley",
+        href: "/category/spiti-valley",
         icon: <img className=" size-5" src={"./spiti.png"} />
     },
     {
         title: "International",
-        href: "/trek",
+        href: "/category/international",
         icon: <img className=" size-5" src={"./international.png"} />
     },
     {
         title: "Group Tours",
-        href: "/experiences",
+        href: "/category/group-tours",
         icon: <img className=" size-5" src={"./group-tour.png"} />
     },
     {
         title: "Custom Trips",
-        href: "/custom-trips",
+        href: "/category/custom-trips",
         icon: <img className=" size-5" src={"./customised.png"} />
     },
     {
         title: "Weekend Escape",
-        href: "/about-us",
+        href: "/category/weekend-escape",
         icon: <img className=" size-5" src={"./weekend.png"} />
     },
     {
         title: "Upcoming",
-        href: "/contact-us",
+        href: "/category/upcoming",
         icon: <img className=" size-5" src={"./upcomming.png"} />
     },
 ]

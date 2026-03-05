@@ -11,7 +11,7 @@ export const PackageTable = pgTable("packages", {
     itineraryUrl: text("itinerary_url").notNull(),
     itineraryImage: text("itinerary_image").notNull(),
 
-    slug: text("slug").notNull(),
+    slug: text("slug").notNull().unique(),
     pickup: text("pickup").notNull(),
     dropoff: text("dropoff").notNull(),
     location: text("location").notNull(),
@@ -45,7 +45,7 @@ export const itineraryTable = pgTable("itinerary", {
 export const categoryTable = pgTable("categories", {
     id: serial("id").primaryKey(),
     name: text("name").notNull(),
-    slug: text("slug").notNull(),
+    slug: text("slug").notNull().unique(),
     createdAt: timestamp("created_at").defaultNow(),
     updatedAt: timestamp("updated_at").defaultNow(),
 });
