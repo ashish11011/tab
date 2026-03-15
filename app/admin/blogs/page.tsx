@@ -59,7 +59,6 @@ export default function BlogsPage() {
     const filteredBlogs = blogs.filter(blog =>
         blog.title.toLowerCase().includes(searchTerm.toLowerCase())
     );
-    return <></>
     return (
         <div className="space-y-6">
             <div className="flex justify-between items-center">

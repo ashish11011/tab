@@ -2,7 +2,6 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Package, Layers, MessageSquare } from "lucide-react";
 
 export default function AdminDashboard() {
-    return <></>
     return (
         <div className="space-y-6">
             <h1 className="text-3xl font-bold">Dashboard</h1>
