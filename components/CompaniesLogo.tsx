@@ -6,7 +6,7 @@ const CompaniesLogos = () => {
             <p className=" border rounded-full py-1 px-4 w-fit mx-auto dm font-semibold tracking-wide text-neutral-700 border-gray-100 shadow-sm text-sm shadow-gray-200">
                 We have been working with
             </p>
-            <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-6 ">
+            <div className=" grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6 ">
                 {data.map((item, idx) => {
                     return (
                         <img

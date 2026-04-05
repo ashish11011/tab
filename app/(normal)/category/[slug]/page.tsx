@@ -1,24 +1,25 @@
-import { notFound } from "next/navigation";
-import { getCategoryBySlug, getPackagesByCategoryId, getFaqsByCategoryId } from "@/lib/actions";
-import PackageCard from "@/components/PackageCard";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
+import { getCategoryBySlug } from "@/lib/actions";
+import { Suspense } from "react";
+import { Packages } from "./packages";
+import { CategoryFaqs } from "./catFaqs";
+import { Skeleton } from "@/components/ui/skeleton";
 
-interface CategoryPageProps {
-    params: Promise<{ slug: string }>;
+export const revalidate = 60;
+
+export async function generateStaticParams() {
+    return [{ slug: 'spiti-valley-4d-5n' }]
 }
 
-export default async function Page({ params }: CategoryPageProps) {
+export default async function Page({ params }: PageProps<"/category/[slug]">) {
     const { slug } = await params;
+    if (!slug) {
+        return <div>No Package found</div>
+    }
     const category = await getCategoryBySlug(slug);
 
     if (!category) {
-        return notFound();
+        return <div>No Package found</div>
     }
-
-    const [packages, faqs] = await Promise.all([
-        getPackagesByCategoryId(category.id),
-        getFaqsByCategoryId(category.id)
-    ]);
 
     return (
         <div className=" py-12 md:px-16 px-4">
@@ -27,43 +28,34 @@ export default async function Page({ params }: CategoryPageProps) {
                 Explore our curated selection of packages for {category.name}.
                 Discover unforgettable journeys and unique experiences.
             </p>
-            <div className=" mt-12 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {packages.length > 0 ? (
-                    packages.map((pkg: any) => (
-                        <PackageCard key={pkg.id} pkg={pkg} />
-                    ))
-                ) : (
-                    <p className="col-span-full text-center text-gray-500 py-12">No packages found for this category.</p>
-                )}
-            </div>
 
-            {faqs.length > 0 && <CategoryFaqs faqs={faqs} />}
+            <Suspense fallback={<PackageSkleton />} >
+                <Packages catId={category.id} />
+            </Suspense>
+            <Suspense fallback={<CatFaqsSkleton />}>
+                <CategoryFaqs catId={category.id} />
+            </Suspense>
         </div>
     );
 }
 
-const CategoryFaqs = ({ faqs }: { faqs: any[] }) => {
+
+const PackageSkleton = () => {
     return (
-        <div className="mt-16">
-            <h1 className=" text-3xl font-bold text-center">Frequently asked questions </h1>
-            <Accordion
-                className=" max-w-7xl mt-6 mx-auto"
-                type="single"
-                collapsible
-            >
-                {faqs.map((data, index) => {
-                    return (
-                        <AccordionItem key={index} value={data.question}>
-                            <AccordionTrigger>
-                                {data.question}
-                            </AccordionTrigger>
-                            <AccordionContent>
-                                {data.answer}
-                            </AccordionContent>
-                        </AccordionItem>
-                    )
-                })}
-            </Accordion>
+        <div className=" mt-20 w-fit grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <Skeleton className="h-[220px] w-[220px] rounded-lg" />
+            <Skeleton className="h-[220px] w-[220px] rounded-lg" />
         </div>
     )
 }
+
+const CatFaqsSkleton = () => {
+    return (
+        <div className=" mt-20  flex flex-col gap-4">
+            <Skeleton className="h-[20px] w-[90px] rounded-lg" />
+            <Skeleton className="h-[20px] w-[220px] rounded-lg" />
+        </div>
+    )
+}
+
+

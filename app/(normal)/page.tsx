@@ -1,6 +1,3 @@
-"use client";
-
-import { useState, useEffect } from "react";
 import CompaniesLogos from "@/components/CompaniesLogo";
 import DomesticTrip from "@/components/DomasticTrip";
 import { FAQsAccordion } from "@/components/FAQAccordion";
@@ -11,24 +8,25 @@ import ReasonsSection from "@/components/ReasonSection";
 import TripStats from "@/components/tripStar";
 
 export default function Home() {
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsPopupOpen(true);
-    }, 5000); // Open after 5 seconds
-    return () => clearTimeout(timer);
-  }, []);
+
+  const instaReels = [
+    "/reels/reel1.mp4",
+    "/reels/reel2.mp4",
+    "/reels/reel3.mp4",
+    "/reels/reel4.mp4",
+  ]
 
   return (
     <div>
-      <LeadPopupForm open={isPopupOpen} setOpen={setIsPopupOpen} />
+      <LeadPopupForm />
       <HeroSection />
       <TripStats />
       <DomesticTrip />
       <ReasonsSection />
       <HowItWorksSection />
       <PackageCrousel />
+      <InstagramReels instaReels={instaReels} />
       <CompaniesLogos />
       <FAQsAccordion />
       <div className=" px-4">
@@ -48,3 +46,18 @@ const HeroSection = () => {
   );
 }
 
+
+
+const InstagramReels = ({ instaReels }: { instaReels: string[] }) => {
+  return (
+    <div className=" w-full flex md:grid overflow-x-scroll grid-cols-4 gap-6 max-w-7xl mx-auto px-4 mt-20">
+      {
+        instaReels.map((reelURL: string) => {
+          return <div className=" w-full h-auto min-w-48">
+            <video src={reelURL} muted autoPlay loop />
+          </div>
+        })
+      }
+    </div>
+  )
+}

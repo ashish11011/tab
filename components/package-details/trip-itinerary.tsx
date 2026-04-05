@@ -28,7 +28,7 @@ export function TripItinerary({ itinerary }: TripItineraryProps) {
                 value={openItem}
                 onValueChange={setOpenItem}
             >
-                {itinerary.map((item) => (
+                {itinerary.map((item, idx) => (
                     <AccordionItem
                         key={item.id}
                         value={`item-${item.id}`}

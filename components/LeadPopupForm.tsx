@@ -12,8 +12,20 @@ import { Input } from "./ui/input";
 import { Label } from "./ui/label";
 import { Textarea } from "./ui/textarea";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/form";
+import { useEffect, useState } from "react";
 
-export const LeadPopupForm = ({ open, setOpen }: { open: boolean, setOpen: (open: boolean) => void }) => {
+export const LeadPopupForm = () => {
+
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsPopupOpen(true);
+        }, 5000); // Open after 5 seconds
+        return () => clearTimeout(timer);
+    }, []);
+
+
     const pathname = usePathname();
     const slug = pathname === "/" ? "home" : pathname.split("/").pop() || "home";
 
@@ -33,14 +45,17 @@ export const LeadPopupForm = ({ open, setOpen }: { open: boolean, setOpen: (open
             await submitQuery(data);
             toast.success("Query submitted successfully!");
             form.reset();
-            setOpen(false);
+            setIsPopupOpen(false);
         } catch (error) {
             toast.error("Failed to submit query. Please try again.");
         }
     };
+    if (!isPopupOpen) {
+        return <div></div>
+    }
 
     return (
-        <Dialog open={open} onOpenChange={setOpen}>
+        <Dialog open={isPopupOpen} onOpenChange={setIsPopupOpen}>
             <DialogContent className="">
                 <DialogHeader>
                     <DialogTitle className=" flex gap-1 items-center"><p>Excited for your new adventure?</p> <img src="/excited.png" alt="header" className="size-6 object-cover" /></DialogTitle>

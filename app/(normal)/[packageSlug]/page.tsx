@@ -1,17 +1,20 @@
 import { notFound } from "next/navigation";
 import { Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { getPackageBySlug } from "@/lib/actions";
 import { HeaderGallaryMobile } from "@/components/package-details/header-gallery-mobile";
 import { TripItinerary } from "@/components/package-details/trip-itinerary";
 import { PackageEnquiryForm } from "@/components/package-details/package-enquiry-form";
+import Image from "next/image";
+import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "@/components/ui/carousel";
 
-interface PackagePageProps {
-    params: Promise<{ packageSlug: string }>;
+
+export async function generateStaticParams() {
+    return [{ slug: 'spiti-valley-4d-5n' }]
 }
 
-export default async function PackagePage({ params }: PackagePageProps) {
+export default async function PackagePage({ params }: PageProps<"/[packageSlug]">) {
     const { packageSlug } = await params;
     const pkg = await getPackageBySlug(packageSlug);
 
@@ -19,10 +22,11 @@ export default async function PackagePage({ params }: PackagePageProps) {
         return notFound();
     }
 
+
     return (
         <div className="lg:px-12 px-4 py-12">
-            <HeaderGallary media={pkg.media} />
-            <HeaderGallaryMobile images={pkg.media} />
+            <HeaderGallary media={pkg.mainBannerImage} mobile={pkg.mainMobileBannerImage} />
+            {/* <HeaderGallaryMobile images={pkg.media} /> */}
 
             <div className="grid grid-cols-1 md:grid-cols-6 mt-8 gap-6">
                 <div className="space-y-6 col-span-6 md:col-span-4">
@@ -39,42 +43,29 @@ export default async function PackagePage({ params }: PackagePageProps) {
                     {pkg.pricing && pkg.pricing.length > 0 && (
                         <PackageCosting pricing={pkg.pricing} />
                     )}
+                    <PackageGallary mediaImages={pkg.media} />
+
                 </div>
 
-                <div className="col-span-6 md:col-span-2 space-y-6">
-                    <PackagePriceCard
+                <div className="col-span-6 h-full md:col-span-2 space-y-6">
+                    <PackageEnquiryForm
                         price={pkg.price}
                         strikeThroughPrice={pkg.strikeThroughPrice}
+                        slug={pkg.slug}
                     />
-                    <PackageEnquiryForm slug={pkg.slug} />
                 </div>
             </div>
         </div>
     );
 }
 
-const HeaderGallary = ({ media }: { media: any[] }) => {
-    if (media.length === 0) return null;
-
-    // Use current images or placeholders if not enough
-    const displayImages = [...media];
-    while (displayImages.length < 5) {
-        displayImages.push(displayImages[0]);
-    }
-
+const HeaderGallary = ({ media, mobile }: { media: string, mobile: string }) => {
+    if (media == null || media == undefined) return null;
+    console.log(media)
     return (
-        <div className="hidden md:grid aspect-22/7 w-full grid-cols-2 gap-3 overflow-hidden rounded-2xl">
-            <img src={displayImages[0].mediaUrl} alt="header main" className="aspect-22/16 w-full h-full object-cover" />
-            <div className="grid grid-cols-1 aspect-22/14 grid-rows-2 gap-3">
-                <div className="grid grid-cols-2 overflow-hidden gap-3">
-                    <img src={displayImages[1].mediaUrl} alt="gallery" className="w-full h-full object-cover" />
-                    <img src={displayImages[2].mediaUrl} alt="gallery" className="w-full h-full object-cover" />
-                </div>
-                <div className="grid grid-cols-2 overflow-hidden gap-3">
-                    <img src={displayImages[3].mediaUrl} alt="gallery" className="w-full h-full object-cover" />
-                    <img src={displayImages[4].mediaUrl} alt="gallery" className="w-full h-full object-cover" />
-                </div>
-            </div>
+        <div className="w-full h-auto object-contain">
+            <img src={media} height={750} width={750} alt="banner-image" className=" hidden md:block w-full h-auto object-contain" />
+            <img src={mobile} height={750} width={750} alt="banner-image" className=" md:hidden w-full h-auto object-contain" />
         </div>
     );
 }
@@ -82,11 +73,11 @@ const HeaderGallary = ({ media }: { media: any[] }) => {
 const TripAbout = ({ name, about, itineraryUrl }: { name: string; about: string; itineraryUrl: string }) => {
     return (
         <div className="space-y-4">
-            <div className="flex md:flex-row flex-col gap-3 justify-between items-start">
+            <div className="flex md:flex-row  flex-col gap-3 justify-between items-start">
                 <Heading text={`About ${name}`} />
                 {itineraryUrl && (
-                    <a href={itineraryUrl} target="_blank" rel="noopener noreferrer">
-                        <Button className="rounded-full cursor-pointer font-medium shadow-sm">
+                    <a href={itineraryUrl} target="_blank" className=" w-full sm:w-fit" rel="noopener noreferrer">
+                        <Button className="rounded-full w-full cursor-pointer font-medium shadow-sm">
                             <Download className="size-4 mr-2" />
                             Download Itinerary
                         </Button>
@@ -106,7 +97,7 @@ const PackageIncludeExclude = ({ included, excluded }: { included: string; exclu
         <div className="mt-8">
             <Heading text="Package Includes & Excludes" />
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-6">
-                <div className="bg-gray-50/50 p-6 rounded-2xl border border-gray-100">
+                <div className="bg-gray-50/50 h-fit p-6 rounded-2xl border border-gray-100">
                     <h3 className="text-lg font-semibold mb-3 flex items-center text-green-700">
                         <span className="mr-2">✓</span> Package Includes
                     </h3>
@@ -115,7 +106,7 @@ const PackageIncludeExclude = ({ included, excluded }: { included: string; exclu
                         className="text-sm prose prose-sm max-w-none prose-ul:list-disc"
                     />
                 </div>
-                <div className="bg-gray-50/50 p-6 rounded-2xl border border-gray-100">
+                <div className="bg-gray-50/50 h-fit p-6 rounded-2xl border border-gray-100">
                     <h3 className="text-lg font-semibold mb-3 flex items-center text-red-700">
                         <span className="mr-2">✕</span> Package Excludes
                     </h3>
@@ -135,15 +126,7 @@ const PackagePriceCard = ({ price, strikeThroughPrice }: { price: number; strike
     return (
         <Card className="shadow-sm border-gray-100 overflow-hidden">
             <CardHeader className="bg-gray-50/50 flex flex-col gap-1 pb-4">
-                <div className="flex items-baseline gap-3">
-                    <span className="text-3xl font-bold text-primary">₹{price.toLocaleString()}</span>
-                    {strikeThroughPrice > price && (
-                        <span className="text-gray-400 line-through text-lg">₹{strikeThroughPrice.toLocaleString()}</span>
-                    )}
-                </div>
-                {discount > 0 && (
-                    <div className="text-sm font-medium text-green-600">Save ₹{discount.toLocaleString()}!</div>
-                )}
+
             </CardHeader>
             <CardContent className="pt-4">
                 <p className="text-xs text-center text-gray-500 mb-4">Price per person (Triple Sharing)</p>
@@ -182,4 +165,23 @@ const Heading = ({ text }: { text: string }) => {
     return (
         <h2 className="text-2xl md:text-3xl font-bold tracking-tight text-gray-900">{text}</h2>
     );
+}
+const PackageGallary = ({ mediaImages }: { mediaImages: any[] }) => {
+    return (
+        <div>
+            <Carousel>
+                <CarouselContent>
+                    {
+                        mediaImages.map((mediaURL: any) => {
+                            return <CarouselItem key={mediaURL.id} className="  min-w-96 md:min-w-none basis-1 md:basis-1/3">
+                                <img className=" rounded-xs w-full h-auto min-h-52 border" src={mediaURL.mediaUrl} />
+                            </CarouselItem>
+                        })
+                    }
+                </CarouselContent>
+                <CarouselNext className="right-4 z-10 bg-white" />
+                <CarouselPrevious className="left-4 z-10 bg-white" />
+            </Carousel>
+        </div>
+    )
 }

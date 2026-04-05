@@ -1,7 +1,10 @@
+import { getPackagesByCategoryId } from "@/lib/actions";
 import PackageCard from "./PackageCard";
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from "./ui/carousel";
 
-export default function PackageCrousel() {
+export default async function PackageCrousel() {
+    const packages = await getPackagesByCategoryId(12);
+
     return (
         <div className=" max-w-7xl px-4 mx-auto">
             <div >
@@ -14,9 +17,9 @@ export default function PackageCrousel() {
                 className="w-full md:px-6 mt-8 "
             >
                 <CarouselContent>
-                    {Array.from({ length: 10 }).map((_, index) => (
+                    {packages.map((pkg, index) => (
                         <CarouselItem key={index} className=" basis-[300px] sm:basis-1/2 md:basis-[372px] ">
-                            <PackageCard />
+                            <PackageCard pkg={pkg} />
                         </CarouselItem>
                     ))}
                 </CarouselContent>

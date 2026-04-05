@@ -19,7 +19,6 @@ const DomesticTrip = () => {
             />
             <TripHeading />
             <TripHeadingMobile />
-            {/* <div className="h-1 bg-black w-full"></div> */}
             <ListTrips />
         </div>
     );
@@ -31,14 +30,11 @@ function TripHeading() {
     return (
         <div className=" hidden md:flex flex-col absolute  top-14 left-12">
             <h2 className=" text-white   drop-shadow-[1px_1px_2px_rgba(0,0,0,0.9)] font-semibold text-3xl">
-                Domestic Trips
+                Places You’ll Love
             </h2>
             <p className=" text-white dm text-lg  drop-shadow-[1px_1px_2px_rgba(0,0,0,0.9)] font-medium">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
+                Carefully curated destinations designed for every kind of traveler.
             </p>
-            {/* <button className=" mt-6 px-4 py-1 rounded-md bg-blue-600 w-fit  cursor-pointer hover:bg-blue-500 duration-200 text-white">
-                Explore More
-            </button> */}
         </div>
     );
 }
@@ -47,10 +43,10 @@ function TripHeadingMobile() {
     return (
         <div className=" flex md:hidden flex-col  ">
             <h2 className=" text-black  font-semibold text-3xl">
-                Domestic Trips
+                Places You’ll Love
             </h2>
             <p className=" text-black dm text-lg  font-medium">
-                Lorem ipsum dolor sit amet consectetur adipisicing.
+                Carefully curated destinations designed for every kind of traveler.
             </p>
         </div>
     );
@@ -67,7 +63,7 @@ function ListTrips() {
             <CarouselContent>
                 {tripData.map((item, index) => (
                     <CarouselItem key={index} className=" basis-1/2 md:basis-1/3 lg:basis-1/5">
-                        <Link href={"/category"}>
+                        <Link href={`/category/${item.url}`}>
                             <div className="h-60 w-full border-2 border-white  rounded-xl overflow-hidden relative group cursor-pointer">
                                 {/* image */}
                                 <img
@@ -97,45 +93,54 @@ const tripData = [
         title: "Leh Ladakh",
         price: "Rs. 21,999",
         image: "/trip/ladakh.webp",
+        url: "ladakh"
     },
     {
         title: "Spiti",
         price: "Rs. 17,999",
         image: "/trip/spiti.webp",
+        url: "spiti-valley"
     },
     {
         title: "Meghalaya",
         price: "Rs. 21,499",
         image: "/trip/meghalaya.webp",
+        url: "maghalaya"
     },
     {
         title: "Kerala",
         price: "Rs. 12,499",
         image: "/trip/kerala.webp",
+        url: "kerala"
     },
     {
         title: "Himachal",
         price: "Rs. 8,999",
         image: "/trip/himachal.webp",
+        url: "himachal"
     },
     {
         title: "Kashmir",
         price: "Rs. 24,999",
         image: "/trip/kashmir-romantic-02.webp",
+        url: "kashmir"
     },
     {
         title: "Rajasthan",
         price: "Rs. 11,999",
         image: "/trip/rajasthan.webp",
+        url: "rajasthan"
     },
     {
         title: "Uttrakhandh",
         price: "Rs. 9,999",
         image: "/trip/uttarakhand.webp",
+        url: "uttrakhandh"
     },
     {
         title: "Andaman",
         price: "Rs. 29,999",
         image: "/trip/andaman.webp",
+        url: "andaman"
     },
 ];

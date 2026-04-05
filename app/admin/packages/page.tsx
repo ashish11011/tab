@@ -115,7 +115,7 @@ export default function PackagesPage() {
                                 <TableRow key={pkg.id}>
                                     <TableCell>
                                         <div className="flex items-center gap-3">
-                                            <div className="h-12 w-20 rounded-md overflow-hidden bg-slate-100 flex-shrink-0">
+                                            <div className="h-12 w-20 rounded-md overflow-hidden bg-slate-100 shrink-0">
                                                 {pkg.mainBannerImage ? (
                                                     <img
                                                         src={pkg.mainBannerImage}
@@ -128,7 +128,7 @@ export default function PackagesPage() {
                                                     </div>
                                                 )}
                                             </div>
-                                            <div className="flex flex-col">
+                                            <div className="flex max-w-sm flex-col">
                                                 <span className="font-medium">{pkg.name}</span>
                                                 <span className="text-xs text-muted-foreground line-clamp-1">{pkg.description}</span>
                                             </div>
@@ -151,7 +151,7 @@ export default function PackagesPage() {
                                     </TableCell>
                                     <TableCell className="text-right">
                                         <div className="flex justify-end gap-2">
-                                            <Link href={`/package/${pkg.slug}`} target="_blank">
+                                            <Link href={`/${pkg.slug}`} target="_blank">
                                                 <Button variant="ghost" size="icon" title="View Public Page">
                                                     <ExternalLink className="h-4 w-4" />
                                                 </Button>

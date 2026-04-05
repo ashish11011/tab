@@ -13,9 +13,11 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 
 interface PackageEnquiryFormProps {
     slug: string;
+    strikeThroughPrice: number;
+    price: number;
 }
 
-export function PackageEnquiryForm({ slug }: PackageEnquiryFormProps) {
+export function PackageEnquiryForm({ slug, price, strikeThroughPrice }: PackageEnquiryFormProps) {
     const form = useForm<FormQueryInput>({
         resolver: zodResolver(formQuerySchema),
         defaultValues: {
@@ -37,14 +39,24 @@ export function PackageEnquiryForm({ slug }: PackageEnquiryFormProps) {
         }
     };
 
+    const discount = price - strikeThroughPrice;
+
     return (
-        <Card className="shadow-sm">
+        <Card className=" sticky top-6 shadow-sm">
             <CardHeader>
+                <div className="flex items-baseline gap-3">
+                    <span className="text-3xl font-bold text-primary">₹{price.toLocaleString()}</span>
+                    {strikeThroughPrice > price && (
+                        <span className="text-gray-400 line-through text-lg">₹{strikeThroughPrice.toLocaleString()}</span>
+                    )}
+                </div>
                 <CardTitle className="text-xl">Inquire about this package</CardTitle>
+
             </CardHeader>
             <CardContent>
+
                 <Form {...form}>
-                    <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <form onSubmit={form.handleSubmit(onSubmit)} className=" space-y-4">
                         <FormField
                             control={form.control}
                             name="name"
