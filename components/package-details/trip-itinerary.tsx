@@ -37,8 +37,8 @@ export function TripItinerary({ itinerary }: TripItineraryProps) {
                         <AccordionTrigger className="hover:no-underline text-base cursor-pointer py-2">
                             {item.title}
                         </AccordionTrigger>
-                        <AccordionContent className="text-gray-700">
-                            <div dangerouslySetInnerHTML={{ __html: item.description }} className="prose prose-sm max-w-none" />
+                        <AccordionContent className="text-gray-700 pt-6">
+                            <p className=" whitespace-pre-wrap">{item.description}</p>
                         </AccordionContent>
                     </AccordionItem>
                 ))}

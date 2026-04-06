@@ -91,8 +91,8 @@ const NAVBAR_LINKS = [
         icon: <Image alt="cat-icon" height={20} width={20} className=" size-5" src={"/weekend.png"} />
     },
     {
-        title: "Upcoming",
-        href: "/category/upcoming",
+        title: "Dreamy Himachal",
+        href: "/category/dreamy-himachal",
         icon: <Image alt="cat-icon" height={20} width={20} className=" size-5" src={"/upcomming.png"} />
     },
 ]

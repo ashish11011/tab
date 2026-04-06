@@ -22,7 +22,6 @@ export default async function PackagePage({ params }: PageProps<"/[packageSlug]"
         return notFound();
     }
 
-
     return (
         <div className="lg:px-12 px-4 py-12">
             <HeaderGallary media={pkg.mainBannerImage} mobile={pkg.mainMobileBannerImage} />
@@ -43,7 +42,7 @@ export default async function PackagePage({ params }: PageProps<"/[packageSlug]"
                     {pkg.pricing && pkg.pricing.length > 0 && (
                         <PackageCosting pricing={pkg.pricing} />
                     )}
-                    <PackageGallary mediaImages={pkg.media} />
+                    {pkg.media.length > 0 && <PackageGallary mediaImages={pkg.media} />}
 
                 </div>
 
